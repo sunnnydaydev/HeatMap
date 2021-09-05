@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.amap.api.maps.AMap
+import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.HeatMapLayerOptions
 import com.amap.api.maps.model.HeatmapTileProvider
 import com.amap.api.maps.model.LatLng
@@ -29,10 +30,9 @@ class MainActivity : AppCompatActivity() {
         mMapView.onCreate(savedInstanceState)
 
         val aMap = mMapView.map
+        val latLng = LatLng(31.23,121.47) //shanghai
+        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,9F))
         generateHeatMap(aMap = aMap)
-
-        // todo 热力图修改为指定位置
-
     }
 
     override fun onPause() {
@@ -57,8 +57,8 @@ class MainActivity : AppCompatActivity() {
 
         //1:第一步，组织热力图数据
         val list = ArrayList<LatLng>()
-        val defaultX = 39.904979
-        val defaultY = 116.40964
+        val defaultX =  31.23
+        val defaultY = 121.47
 
         repeat(SIZE) {
             Log.d(TAG,"index:$it")
